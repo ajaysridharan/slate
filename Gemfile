@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+ruby '2.2.1'
+# The line below is not a comment
+#ruby-gemset=cfo_prod_rails_4251
+
 # Middleman
 gem 'middleman', '~>4.0.0'
 gem 'middleman-gh-pages', '~> 0.0.3'
