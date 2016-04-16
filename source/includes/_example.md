@@ -2,6 +2,20 @@
 
 ## Get All Metrics
 
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get()
+```
+
 ```shell
 curl "http://example.com/api/kittens"
   -H "Authorization: meowmeowmeow"

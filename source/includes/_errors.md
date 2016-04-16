@@ -26,3 +26,12 @@ Error Code | Meaning
 ---------- | -------
 200 | OK -- Everything worked as expected.
 401 | Unauthorized -- No valid API key provided.
+404 | Not Found -- The requested object does not exist.
+
+Error Attributes
+
+Attribute | Description
+---------- | -------
+type | The type of the error. Can be: "invalid_request_error"
+message | A human-readable message providing more details about the error.
+param | The parameter this error relates to. Optional.

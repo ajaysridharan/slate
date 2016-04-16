@@ -3,11 +3,11 @@
 > To authenticate, add your API key to the HTTP header:
 
 ```shell
-  curl http://fo-api.dev/v2/mrr/201602 \
+  curl https://api.firstofficer.io/v2/mrr/201602 \
   -H 'Authorization: Token token="YourTokenHere"'
   
   
-  curl http://fo-api.dev/v2/mrr/201602 \
+  curl https://api.firstofficer.io/v2/mrr/201602 \
   -u YourTokenHere:
 ```
 

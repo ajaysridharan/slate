@@ -1,8 +1,8 @@
 ---
-title: API Reference
+title: FirstOfficer API Reference
 
 language_tabs:
-  - curl
+  - shell
   - ruby
 
 toc_footers:
@@ -12,6 +12,7 @@ toc_footers:
 includes:
   - authentication
   - errors
+  - customers
 
 search: true
 ---
@@ -27,7 +28,7 @@ JSON is returned by all API responses, including errors.
 Please note that the API is currently in beta and contents may change. 
 V2 will be the first publicly available version and all non-backwards compatible changes will be made to a new API version.  
 
-```curl
+```code
 API Endpoint
 
 https://api.firstofficer.io
