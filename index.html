@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>FirstOfficer API Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;curl&quot;,&quot;ruby&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -102,7 +102,7 @@
       <br>
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="curl">curl</a>
+              <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
         </div>
         <div class="search">
@@ -141,11 +141,11 @@ https://api.firstofficer.io
 <blockquote>
 <p>To authenticate, add your API key to the HTTP header:</p>
 </blockquote>
-<pre class="highlight shell"><code>  curl http://fo-api.dev/v2/mrr/201602 <span class="se">\</span>
+<pre class="highlight shell"><code>  curl https://api.firstofficer.io/v2/mrr/201602 <span class="se">\</span>
   -H <span class="s1">'Authorization: Token token="YourTokenHere"'</span>
 
 
-  curl http://fo-api.dev/v2/mrr/201602 <span class="se">\</span>
+  curl https://api.firstofficer.io/v2/mrr/201602 <span class="se">\</span>
   -u YourTokenHere:
 </code></pre>
 
@@ -201,12 +201,145 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 <td>401</td>
 <td>Unauthorized &ndash; No valid API key provided.</td>
 </tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The requested object does not exist.</td>
+</tr>
 </tbody></table>
+
+<p>Error Attributes</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>The type of the error. Can be: &ldquo;invalid_request_error&rdquo;</td>
+</tr>
+<tr>
+<td>message</td>
+<td>A human-readable message providing more details about the error.</td>
+</tr>
+<tr>
+<td>param</td>
+<td>The parameter this error relates to. Optional.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="customers">Customers</h1>
+
+<p>Customers API allows you to retrieve a snapshot of your customer&rsquo;s metrics. </p>
+
+<h2 id="the-customer-object">The customer object</h2>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1340573</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stripe_id"</span><span class="p">:</span><span class="s2">"cus_1234ABCD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"extra_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Customer&rsquo;s ID in FirstOfficer, integer</td>
+</tr>
+<tr>
+<td>stripe_id</td>
+<td>Customers ID in Stripe, string</td>
+</tr>
+<tr>
+<td>extra_id</td>
+<td>Optional internal ID from Stripe metadata, <a href='https://www.firstofficer.io/activate_ext_id'>instructions here</a>, string</td>
+</tr>
+<tr>
+<td>total_contract_value</td>
+<td>The realized customer lifetime value by now. Includes all purchases, integer</td>
+</tr>
+<tr>
+<td>current_mrr</td>
+<td>MRR in the current month, integer</td>
+</tr>
+<tr>
+<td>current_subscription_count</td>
+<td>Subscription count in the current month, integer. When subscription count is zero, customer is lost. This does not relate to the real-time active/cancelled subscriptions in Stripe, but customer&rsquo;s status in bookkeeping. Reflects the subscriptions that contributed to MRR.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>The currency for this customer, e.g. &ldquo;usd&rdquo;, &ldquo;eur&rdquo;, string.</td>
+</tr>
+</tbody></table>
+
+<h2 id="retrieve-a-customer">Retrieve a customer</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/customers/cus_1234ABCD  <span class="se">\</span>
+-u YourTokenHere:
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1340573</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stripe_id"</span><span class="p">:</span><span class="s2">"cus_1234ABCD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"extra_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/customers/&lt;ID&gt;</code></p>
+
+<p>Retrieves the details of an existing customer.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customer</td>
+<td>The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.</p>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="curl">curl</a>
+                <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="ruby">ruby</a>
           </div>
       </div>
