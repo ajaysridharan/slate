@@ -48,6 +48,7 @@ curl https://api.firstofficer.io/v2/customers/cus_1234ABCD  \
 
 ```json
 {
+    "object": "customer",
     "id":1340573,
     "stripe_id":"cus_1234ABCD",
     "extra_id":null,

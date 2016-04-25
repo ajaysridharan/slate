@@ -1,94 +1,71 @@
 # Metrics
 
-## Get All Metrics
+Metrics API allows you to retrieve your metrics. 
 
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
+## MRR - Monthly Recurring Revenue
 
-> The above command returns JSON structured like this:
+### The MRR object
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
+> Example Response
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+    "id":1340573,
+    "stripe_id":"cus_1234ABCD",
+    "extra_id":null,
+    "total_contract_value":629100,
+    "current_mrr":69900,
+    "current_subscription_count":1,
+    "currency":"usd"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+### Attributes
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+Attribute | Description
+--------- | -------
+id | Customer's ID in FirstOfficer, integer
 
+
+## Retrieve current month's metrics
+
+> Example Request
+
+```ruby
+
+```
+
+
+```shell
+curl https://api.firstofficer.io/v2/metrics  \
+-u YourTokenHere:
+```
+
+> Example Response
+
+```json
+{
+    "id":1340573,
+    "stripe_id":"cus_1234ABCD",
+    "extra_id":null,
+    "total_contract_value":629100,
+    "current_mrr":69900,
+    "current_subscription_count":1,
+    "currency":"usd"
+}
+```
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://api.firstofficer.io/v2/customers/<ID>`
 
-### URL Parameters
+Retrieves the details of an existing customer.
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+### Arguments
 
+Argument | Description
+--------- | -------
+customer | The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email
+
+### Returns
+
+Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.
