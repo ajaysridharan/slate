@@ -120,13 +120,6 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="introduction">Introduction</h1>
-
-<p>This API gives you a REST-based access to your SaaS metrics. You need a <a href='https://www.firstofficer.io'>FirstOfficer.io</a> subscription to use this API.</p>
-
-<p>JSON is returned by all API responses, including errors.</p>
-
-<p>Please note that the API is currently in beta and contents may change. 
-V2 will be the first publicly available version and all non-backwards compatible changes will be made to a new API version.  </p>
 <pre class="highlight plaintext"><code>API Endpoint
 
 https://api.firstofficer.io
@@ -135,6 +128,17 @@ https://api.firstofficer.io
 <blockquote>
 <p>Current version: V2 (BETA, under development)</p>
 </blockquote>
+
+<p>This API gives you a REST-based access to your SaaS metrics. 
+You need a <a href='https://www.firstofficer.io'>FirstOfficer.io</a> subscription to use the API.</p>
+
+<p>JSON is returned by all API responses, including errors.</p>
+
+<p>Please note that the API is currently in beta and contents may change. 
+V2 will be the first publicly available version and all non-backwards compatible changes will be made to a new API version.</p>
+
+<p>At the moment there are not query limits at place, so please use common sense when retrieving data. 
+FirstOfficer updates your data once per hour.  </p>
 
           <h1 id="authentication">Authentication</h1>
 
@@ -302,6 +306,7 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 <p>Example Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1340573</span><span class="p">,</span><span class="w">
     </span><span class="nt">"stripe_id"</span><span class="p">:</span><span class="s2">"cus_1234ABCD"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"extra_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -335,6 +340,211 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 <h3 id="returns">Returns</h3>
 
 <p>Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.</p>
+
+          <h1 id="mrr">MRR</h1>
+
+<p>MRR API allows you to retrieve Monthly Recurring Revenue. </p>
+
+<h2 id="the-mrr-object">The MRR object</h2>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mrr"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="s2">"2016-04-01"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mrr"</span><span class="p">:</span><span class="mi">15317</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscriptions"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"change_in_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"upgrade_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"downgrade_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"new_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"new_customers"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_customers"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"waiting_mrr"</span><span class="p">:</span><span class="mi">1617110</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"waiting_subscriptions"</span><span class="p">:</span><span class="mi">204</span><span class="p">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>month</td>
+<td>The first day of the returned month, ISO format string</td>
+</tr>
+<tr>
+<td>mrr</td>
+<td>MRR, integer. When retrieved for current month, includes only MRR charged by current date and MRR from pre-paid annual subscriptions. The rest will be found in &lsquo;waiting_mrr&rsquo;.</td>
+</tr>
+<tr>
+<td>subscriptions</td>
+<td>Subscription count, integer. When retrieved for current month, includes only subscriptions charged by current date and old annual subscriptions. The rest will be found in &#39;waiting_subscriptions&rsquo;.</td>
+</tr>
+<tr>
+<td>change_in_mrr</td>
+<td>Overall change in MRR due to upgrades and downgrades, integer</td>
+</tr>
+<tr>
+<td>upgrade_mrr</td>
+<td>MRR from upgrades to higher priced plans and increased seats, integer. Change from monthly to annual plan is counted as an upgrade.</td>
+</tr>
+<tr>
+<td>downgrade_mrr</td>
+<td>MRR from downgrades to lower priced plans and decreased seats, integer</td>
+</tr>
+<tr>
+<td>new_mrr</td>
+<td>MRR from new and returning customers, integer</td>
+</tr>
+<tr>
+<td>new_customers</td>
+<td>Number of new and returning customers, integer</td>
+</tr>
+<tr>
+<td>lost_mrr</td>
+<td>MRR from customers who stopped paying, integer</td>
+</tr>
+<tr>
+<td>lost_customers</td>
+<td>Number of customers who stopped paying, integer</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>Currency of this object, e.g. &ldquo;usd&rdquo;, &ldquo;eur&rdquo;, string.</td>
+</tr>
+<tr>
+<td>waiting_mrr</td>
+<td>Expected MRR from subscriptions to be charged, integer. Only shown for current month. The MRR already charged can be found in mrr attribute.</td>
+</tr>
+<tr>
+<td>waiting_subscriptions</td>
+<td>Expected subscriptions to be charged, integer. Only shown for current month.</td>
+</tr>
+</tbody></table>
+
+<h2 id="retrieve-all-mrrs">Retrieve all MRRs</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/mrr  <span class="se">\</span>
+-u YourTokenHere:
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mrr"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"month"</span><span class="p">:</span><span class="s2">"2014-05-01"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"mrr"</span><span class="p">:</span><span class="mi">33700</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"subscriptions"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"expansion_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"contraction_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"upgrade_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"downgrade_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"new_mrr"</span><span class="p">:</span><span class="mi">33700</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"new_customers"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lost_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lost_customers"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mrr"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"month"</span><span class="p">:</span><span class="s2">"2014-06-01"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"mrr"</span><span class="p">:</span><span class="mi">61400</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"subscriptions"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"expansion_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"contraction_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"upgrade_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"downgrade_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"new_mrr"</span><span class="p">:</span><span class="mi">25700</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"new_customers"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lost_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lost_customers"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/mrr</code></p>
+
+<p>Retrieves the MRR from all time.</p>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns a JSON array of MRR objects if the call succeeded. </p>
+
+<h2 id="retrieve-month-39-s-recurring-revenue">Retrieve Month&rsquo;s Recurring Revenue</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/mrr/2016-02-01  <span class="se">\</span>
+-u YourTokenHere:
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mrr"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="s2">"2016-04-01"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mrr"</span><span class="p">:</span><span class="mi">15317</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscriptions"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"change_in_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"upgrade_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"downgrade_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"new_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"new_customers"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_mrr"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_customers"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"waiting_mrr"</span><span class="p">:</span><span class="mi">1617110</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"waiting_subscriptions"</span><span class="p">:</span><span class="mi">204</span><span class="p">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/mrr/&lt;month in ISO format&gt;</code></p>
+
+<p>Retrieves the MRR from a single month</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>month</td>
+<td>ISO format date, e.g. 2016-04-01. Giving any date from the wanted month is OK and will return the MRR, but we recommend using the first day of the month.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns a MRR object if the call succeeded. If the month does not have any data, returns and empty JSON.</p>
 
       </div>
       <div class="dark-box">
