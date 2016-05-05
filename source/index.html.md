@@ -14,6 +14,7 @@ includes:
   - errors
   - customers
   - mrr
+  - invoices
 
 search: true
 ---

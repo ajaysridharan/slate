@@ -25,6 +25,7 @@ FirstOfficer uses conventional HTTP response codes to indicate the success or fa
 Error Code | Meaning
 ---------- | -------
 200 | OK -- Everything worked as expected.
+400 | Bad Request -- The request was unacceptable, often due to missing or invalid parameter.
 401 | Unauthorized -- No valid API key provided.
 404 | Not Found -- The requested object does not exist.
 

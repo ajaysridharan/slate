@@ -68,7 +68,7 @@ Retrieves the details of an existing customer.
 
 Argument | Description
 --------- | -------
-customer | The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email
+customer <small>string</small> | The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small> 
 
 ### Returns
 

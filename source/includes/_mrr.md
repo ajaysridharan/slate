@@ -149,7 +149,7 @@ Retrieves the MRR from a single month
 
 Argument | Description
 --------- | -------
-month | ISO format date, e.g. 2016-04-01. Giving any date from the wanted month is OK and will return the MRR, but we recommend using the first day of the month.
+month <small>ISO date</small> | ISO format date, e.g. 2016-04-01. Giving any date from the wanted month is OK and will return the MRR, but we recommend using the first day of the month. <small class="req-badge">required</small>
 
 ### Returns
 
