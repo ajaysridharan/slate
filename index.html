@@ -86,6 +86,7 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/style.css" rel="stylesheet" />
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
@@ -200,6 +201,10 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 <tr>
 <td>200</td>
 <td>OK &ndash; Everything worked as expected.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; The request was unacceptable, often due to missing or invalid parameter.</td>
 </tr>
 <tr>
 <td>401</td>
@@ -332,8 +337,8 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>customer</td>
-<td>The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email</td>
+<td>customer <small>string</small></td>
+<td>The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small></td>
 </tr>
 </tbody></table>
 
@@ -537,14 +542,225 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>month</td>
-<td>ISO format date, e.g. 2016-04-01. Giving any date from the wanted month is OK and will return the MRR, but we recommend using the first day of the month.</td>
+<td>month <small>ISO date</small></td>
+<td>ISO format date, e.g. 2016-04-01. Giving any date from the wanted month is OK and will return the MRR, but we recommend using the first day of the month. <small class="req-badge">required</small></td>
 </tr>
 </tbody></table>
 
 <h3 id="returns">Returns</h3>
 
 <p>Returns a MRR object if the call succeeded. If the month does not have any data, returns and empty JSON.</p>
+
+          <h1 id="invoices">Invoices</h1>
+
+<p>Invoices API allows you to import non-Stripe payments to FirstOfficer. </p>
+
+<p>Imported invoices will be processed during the next metrics recalculation, usually within one hour. 
+This means your metrics will not update right away after you&rsquo;ve imported the invoice. </p>
+
+<p>You will be able to see the imported invoice in customer&rsquo;s page, which you can access by searching the customer:</p>
+
+<p><code class="prettyprint">https://www.firstofficer.io/customers?stripe_id=cus_ABCD</code></p>
+
+<p>or</p>
+
+<p><code class="prettyprint">https://www.firstofficer.io/customers?email=partialemailhere@gmail.com</code></p>
+
+<h2 id="the-invoice-object">The invoice object</h2>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub_man_2313372_1462443986"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount_paid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_ABCD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hobby_monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_paid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"period_start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <small>integer</small></td>
+<td>Unique identifier.</td>
+</tr>
+<tr>
+<td>object <small>string</small></td>
+<td>Object type, value is &ldquo;invoice&rdquo;.</td>
+</tr>
+<tr>
+<td>amount_paid <small>integer</small></td>
+<td>A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the invoiced amount.</td>
+</tr>
+<tr>
+<td>discount <small>integer</small></td>
+<td>A positive integer representing the discount. Invoice total will be amount - discount.</td>
+</tr>
+<tr>
+<td>amount <small>integer</small></td>
+<td>A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the total amount before discounts.</td>
+</tr>
+<tr>
+<td>currency <small>string</small></td>
+<td>Currency of the invoice, e.g. &lsquo;usd&rsquo;, &#39;eur&rsquo;.</td>
+</tr>
+<tr>
+<td>customer <small>string</small></td>
+<td>The ID of the customer.</td>
+</tr>
+<tr>
+<td>plan <small>string</small></td>
+<td>The ID of the plan. If plan is omitted, payment is booked only into revenue, not to MRR.</td>
+</tr>
+<tr>
+<td>date_paid <small>ISO datetime</small></td>
+<td>ISO datetime representing when the payment was received.</td>
+</tr>
+<tr>
+<td>date <small>ISO datetime</small></td>
+<td>ISO datetime representing when invoice was created.</td>
+</tr>
+<tr>
+<td>quantity <small>integer</small></td>
+<td>The quantity of the seats used.</td>
+</tr>
+<tr>
+<td>period_start <small>ISO datetime</small></td>
+<td>ISO datetime representing the subscription period start time.</td>
+</tr>
+<tr>
+<td>period_end <small>ISO datetime</small></td>
+<td>ISO datetime representing the subscription period end time.</td>
+</tr>
+<tr>
+<td>description <small>string</small></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="import-an-invoice">Import an invoice</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/invoices <span class="se">\</span>
+   -u YourTokenHere: <span class="se">\</span>
+   -d <span class="nv">customer</span><span class="o">=</span>cus_ABCD <span class="se">\</span>
+   -d <span class="nv">plan</span><span class="o">=</span>hobby_monthly <span class="se">\</span>
+   -d <span class="nv">amount</span><span class="o">=</span>4000 
+
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub_man_2313372_1462443986"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount_paid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_ABCD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hobby_monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_paid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"period_start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+</span><span class="p">}</span><span class="w">   
+</span></code></pre>
+
+<aside class="notice">
+At the moment you can only create invoices to existing plans and customers. That&rsquo;ll change when the customer and plan api points are ready.
+</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.firstofficer.io/v2/invoices</code></p>
+
+<p>Creates an invoice.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customer <small>string</small></td>
+<td>The ID of the customer. Stripe ID, FO ID or email. <small class="req-badge">required</small></td>
+</tr>
+<tr>
+<td>plan <small>string</small></td>
+<td>The ID of the plan. If plan is omitted, payment is booked only into revenue, not to MRR.</td>
+</tr>
+<tr>
+<td>amount <small>integer</small></td>
+<td>A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the total amount before discounts. Optional when plan given.</td>
+</tr>
+<tr>
+<td>date_paid <small>ISO datetime</small></td>
+<td>ISO datetime representing when the payment was received. If date_paid is omitted, current time is used.</td>
+</tr>
+<tr>
+<td>discount <small>integer</small></td>
+<td>A positive integer representing the discount. Invoiced amount will be amount - discount.</td>
+</tr>
+<tr>
+<td>id <small>integer</small></td>
+<td>Unique identifier to prevent the same invoice from being imported twice. If id is omitted, it will be generated from date and customer id.</td>
+</tr>
+<tr>
+<td>quantity <small>integer</small></td>
+<td>The quantity of the seats used. If your plan is €10/user/month, you could pass 5 as the quantity to create an invoice of €50 (5 x €10).</td>
+</tr>
+<tr>
+<td>period_start <small>ISO datetime</small></td>
+<td>ISO datetime representing the subscription period start time. If period_start is omitted, date_paid is used.</td>
+</tr>
+<tr>
+<td>currency <small>string</small></td>
+<td>Currency of the invoice, e.g. &#39;usd&rsquo;, &#39;eur&rsquo;.</td>
+</tr>
+<tr>
+<td>description <small>string</small></td>
+<td>Free text describing what got invoiced.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns the invoice object if call succeeds.</p>
+
+<p>Returns an error if:</p>
+
+<ul>
+<li><p>the customer or plan ID provided is invalid</p></li>
+<li><p>the date paid is invalid</p></li>
+</ul>
 
       </div>
       <div class="dark-box">
