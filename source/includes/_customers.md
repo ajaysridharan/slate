@@ -22,13 +22,13 @@ Customers API allows you to retrieve a snapshot of your customer's metrics.
 
 Attribute | Description
 --------- | -------
-id | Customer's ID in FirstOfficer, integer
-stripe_id | Customers ID in Stripe, string
-extra_id | Optional internal ID from Stripe metadata, <a href='https://www.firstofficer.io/activate_ext_id'>instructions here</a>, string
-total_contract_value | The realized customer lifetime value by now. Includes all purchases, integer
-current_mrr | MRR in the current month, integer
-current_subscription_count | Subscription count in the current month, integer. When subscription count is zero, customer is lost. This does not relate to the real-time active/cancelled subscriptions in Stripe, but customer's status in bookkeeping. Reflects the subscriptions that contributed to MRR.
-currency | The currency for this customer, e.g. "usd", "eur", string.
+id <small>integer</small> | Customer's ID in FirstOfficer
+stripe_id <small>string</small> | Customer's ID in Stripe
+extra_id <small>string</small> | Optional internal ID from Stripe metadata, <a href='https://www.firstofficer.io/activate_ext_id'>instructions here</a>
+total_contract_value <small>integer</small> | The realized customer lifetime value by now. Includes all purchases
+current_mrr <small>integer</small> | MRR in the current month
+current_subscription_count <small>integer</small> | Subscription count in the current month. When subscription count is zero, customer is lost. This does not relate to the real-time active/cancelled subscriptions in Stripe, but customer's status in bookkeeping. Reflects the subscriptions that contributed to MRR.
+currency <small>string</small> | The currency for this customer, e.g. "usd", "eur"
 
 ## Retrieve a customer
 
@@ -60,7 +60,7 @@ curl https://api.firstofficer.io/v2/customers/cus_1234ABCD  \
 ```
 ### HTTP Request
 
-`GET https://api.firstofficer.io/v2/customers/<ID>`
+`GET https://api.firstofficer.io/v2/customers/<id>`
 
 Retrieves the details of an existing customer.
 
@@ -68,7 +68,7 @@ Retrieves the details of an existing customer.
 
 Argument | Description
 --------- | -------
-customer <small>string</small> | The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small> 
+id <small>string</small> | The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small> 
 
 ### Returns
 

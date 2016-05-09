@@ -29,19 +29,19 @@ MRR API allows you to retrieve Monthly Recurring Revenue.
 
 Attribute | Description
 --------- | -------
-month | The first day of the returned month, ISO format string
-mrr | MRR, integer. When retrieved for current month, includes only MRR charged by current date and MRR from pre-paid annual subscriptions. The rest will be found in 'waiting_mrr'.
-subscriptions | Subscription count, integer. When retrieved for current month, includes only subscriptions charged by current date and old annual subscriptions. The rest will be found in 'waiting_subscriptions'.
-change_in_mrr | Overall change in MRR due to upgrades and downgrades, integer
-upgrade_mrr | MRR from upgrades to higher priced plans and increased seats, integer. Change from monthly to annual plan is counted as an upgrade.
-downgrade_mrr | MRR from downgrades to lower priced plans and decreased seats, integer 
-new_mrr | MRR from new and returning customers, integer
-new_customers | Number of new and returning customers, integer
-lost_mrr | MRR from customers who stopped paying, integer 
-lost_customers | Number of customers who stopped paying, integer
-currency | Currency of this object, e.g. "usd", "eur", string.
-waiting_mrr | Expected MRR from subscriptions to be charged, integer. Only shown for current month. The MRR already charged can be found in mrr attribute.
-waiting_subscriptions | Expected subscriptions to be charged, integer. Only shown for current month.
+month <small>ISO date string</small> | The first day of the returned month
+mrr <small>integer</small> | MRR. When retrieved for current month, includes only MRR charged by current date and MRR from pre-paid annual subscriptions. The rest will be found in 'waiting_mrr'.
+subscriptions <small>integer</small> | Subscription count, integer. When retrieved for current month, includes only subscriptions charged by current date and old annual subscriptions. The rest will be found in 'waiting_subscriptions'.
+change_in_mrr <small>integer</small> | Overall change in MRR due to upgrades and downgrades
+upgrade_mrr <small>integer</small> | MRR from upgrades to higher priced plans and increased seats. Change from monthly to annual plan is counted as an upgrade.
+downgrade_mrr <small>integer</small> | MRR from downgrades to lower priced plans and decreased seats 
+new_mrr <small>integer</small> | MRR from new and returning customers
+new_customers <small>integer</small> | Number of new and returning customers
+lost_mrr <small>integer</small> | MRR from customers who stopped paying 
+lost_customers <small>integer</small> | Number of customers who stopped paying
+currency <small>string</small> | Currency of this object, e.g. "usd", "eur"
+waiting_mrr <small>integer</small> | Expected MRR from subscriptions to be charged. Only shown for current month. The MRR already charged can be found in mrr attribute.
+waiting_subscriptions <small>integer</small> | Expected subscriptions to be charged. Only shown for current month.
 
 ## Retrieve all MRRs
 

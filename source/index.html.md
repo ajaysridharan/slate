@@ -41,3 +41,7 @@ V2 will be the first publicly available version and all non-backwards compatible
   
 At the moment there are not query limits at place, so please use common sense when retrieving data. 
 FirstOfficer updates your data once per hour.  
+
+<aside class="notice">
+All amounts will be returned in the smallest currency unit. E.g. 100 cents to represent $1.00.
+</aside>
