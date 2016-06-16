@@ -244,7 +244,7 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 
           <h1 id="customers">Customers</h1>
 
-<p>Customers API allows you to retrieve a snapshot of your customer&rsquo;s metrics. </p>
+<p>Customers API allows you to retrieve a snapshot of your customer&rsquo;s metrics. You can also update their extra IDs.   </p>
 
 <h2 id="the-customer-object">The customer object</h2>
 
@@ -261,6 +261,10 @@ You must replace <code>YourTokenHere</code> with your personal API key.
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<aside class="notice">
+Extra ID is shown and returned only if the feature is activated for your product. Account owners have access rights to do that.
+</aside>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -343,6 +347,62 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 <tr>
 <td>id <small>string</small></td>
 <td>The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small></td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.</p>
+
+<h2 id="update-a-customer">Update a customer</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl -X PUT https://api.firstofficer.io/v2/customers/7598372  <span class="se">\</span>
+-u YourTokenHere: <span class="se">\</span>
+-d <span class="nv">extra_id</span><span class="o">=</span><span class="s2">"Team X"</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1340573</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stripe_id"</span><span class="p">:</span><span class="s2">"cus_1234ABCD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"extra_id"</span><span class="p">:</span><span class="s2">"Team X"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.firstofficer.io/v2/customers/&lt;id&gt;</code></p>
+
+<p>Updates the details of an existing customer. Any parameters not provided will be left unchanged. 
+If there is conflicting data in Stripe, the data in Stripe will override any data set here.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <small>string</small></td>
+<td>The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small></td>
+</tr>
+<tr>
+<td>extra_id <small>string</small></td>
+<td>Additional ID that will help to identify this customer. If this argument is omitted, extra_id is not changed.</td>
 </tr>
 </tbody></table>
 
