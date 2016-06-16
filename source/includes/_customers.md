@@ -109,7 +109,7 @@ curl -X PUT https://api.firstofficer.io/v2/customers/7598372  \
 ```
 ### HTTP Request
 
-`POST https://api.firstofficer.io/v2/customers/<id>`
+`PUT https://api.firstofficer.io/v2/customers/<id>`
 
 Updates the details of an existing customer. Any parameters not provided will be left unchanged. 
 If there is conflicting data in Stripe, the data in Stripe will override any data set here.
