@@ -103,7 +103,10 @@ At the moment you can only create invoices to existing plans and customers. That
 
 `POST https://api.firstofficer.io/v2/invoices`
 
-Creates an invoice.
+Creates an invoice. 
+
+You can view the imported invoices at [https://www.firstofficer.io/import_payments](https://www.firstofficer.io/import_payments) and see when they get processed.
+That's also where you can delete individual invoices if needed.
 
 ### Arguments
 
