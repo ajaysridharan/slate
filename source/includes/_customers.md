@@ -11,6 +11,8 @@ Customers API allows you to retrieve a snapshot of your customer's metrics. You 
     "id":1340573,
     "stripe_id":"cus_1234ABCD",
     "extra_id":null,
+    "email":"tester@example.com",
+    "name":"John Doe",
     "total_contract_value":629100,
     "current_mrr":69900,
     "current_subscription_count":1,
@@ -19,7 +21,7 @@ Customers API allows you to retrieve a snapshot of your customer's metrics. You 
 ```
 
 <aside class="notice">
-Extra ID is shown and returned only if the feature is activated for your product. Account owners have access rights to do that.
+Extra ID is shown and returned only if the feature is activated for your product. Account owners have access rights to enable and disable optional features.
 </aside>
 
 ### Attributes
@@ -29,10 +31,59 @@ Attribute | Description
 id <small>integer</small> | Customer's ID in FirstOfficer 
 stripe_id <small>string</small> | Customer's ID in Stripe
 extra_id <small>string</small> | Optional internal ID from Stripe metadata, <a href='https://www.firstofficer.io/activate_ext_id'>instructions here</a>
+email <small>string</small> | Customer's email. 
 total_contract_value <small>integer</small> | The realized customer lifetime value by now. Includes all purchases
 current_mrr <small>integer</small> | MRR in the current month
 current_subscription_count <small>integer</small> | Subscription count in the current month. When subscription count is zero, customer is lost. This does not relate to the real-time active/cancelled subscriptions in Stripe, but customer's status in bookkeeping. Reflects the subscriptions that contributed to MRR.
 currency <small>string</small> | The currency for this customer, e.g. "usd", "eur"
+
+## Create a customer
+
+> Example Request
+
+```ruby
+
+```
+
+
+```shell
+curl -X POST https://api.firstofficer.io/v2/customers  \
+-u YourTokenHere: \
+-d email="customer@company.com"
+```
+
+> Example Response
+
+```json
+{
+    "id":1340573,
+    "stripe_id":"cus_1234ABCD",
+    "extra_id":null,
+    "email":"tester@example.com",
+    "name":"John Doe",
+    "total_contract_value":629100,
+    "current_mrr":69900,
+    "current_subscription_count":1,
+    "currency":"usd"
+}
+```
+### HTTP Request
+
+`POST https://api.firstofficer.io/v2/customers`
+
+Creates a customer.
+
+### Arguments
+
+Argument | Description
+--------- | -------
+email <small>string</small> | The email of the customer, unique. <small class="req-badge">required</small>
+name <small>string</small> | The name of the customer.
+extra_id <small>string</small> | Additional ID that will help to identify this customer. 
+
+### Returns
+
+Returns a customer object if the call succeeded. If arguments are invalid, returns <a href=#errors>an error</a>.
 
 ## Retrieve a customer
 
@@ -52,10 +103,11 @@ curl https://api.firstofficer.io/v2/customers/cus_1234ABCD  \
 
 ```json
 {
-    "object": "customer",
     "id":1340573,
     "stripe_id":"cus_1234ABCD",
     "extra_id":null,
+    "email":"tester@example.com",
+    "name":"John Doe",
     "total_contract_value":629100,
     "current_mrr":69900,
     "current_subscription_count":1,
@@ -97,10 +149,11 @@ curl -X PUT https://api.firstofficer.io/v2/customers/7598372  \
 
 ```json
 {
-    "object": "customer",
     "id":1340573,
     "stripe_id":"cus_1234ABCD",
     "extra_id":"Team X",
+    "email":"tester@example.com",
+    "name":"John Doe",
     "total_contract_value":629100,
     "current_mrr":69900,
     "current_subscription_count":1,
