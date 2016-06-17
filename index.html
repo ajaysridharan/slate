@@ -255,6 +255,8 @@ You must replace <code>YourTokenHere</code> with your personal API key.
     </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1340573</span><span class="p">,</span><span class="w">
     </span><span class="nt">"stripe_id"</span><span class="p">:</span><span class="s2">"cus_1234ABCD"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"extra_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"tester@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -263,7 +265,7 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 </span></code></pre>
 
 <aside class="notice">
-Extra ID is shown and returned only if the feature is activated for your product. Account owners have access rights to do that.
+Extra ID is shown and returned only if the feature is activated for your product. Account owners have access rights to enable and disable optional features.
 </aside>
 
 <h3 id="attributes">Attributes</h3>
@@ -287,6 +289,10 @@ Extra ID is shown and returned only if the feature is activated for your product
 <td>Optional internal ID from Stripe metadata, <a href='https://www.firstofficer.io/activate_ext_id'>instructions here</a></td>
 </tr>
 <tr>
+<td>email <small>string</small></td>
+<td>Customer&rsquo;s email.</td>
+</tr>
+<tr>
 <td>total_contract_value <small>integer</small></td>
 <td>The realized customer lifetime value by now. Includes all purchases</td>
 </tr>
@@ -304,6 +310,66 @@ Extra ID is shown and returned only if the feature is activated for your product
 </tr>
 </tbody></table>
 
+<h2 id="create-a-customer">Create a customer</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl -X POST https://api.firstofficer.io/v2/customers  <span class="se">\</span>
+-u YourTokenHere: <span class="se">\</span>
+-d <span class="nv">email</span><span class="o">=</span><span class="s2">"customer@company.com"</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1340573</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stripe_id"</span><span class="p">:</span><span class="s2">"cus_1234ABCD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"extra_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"tester@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.firstofficer.io/v2/customers</code></p>
+
+<p>Creates a customer.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email <small>string</small></td>
+<td>The email of the customer, unique. <small class="req-badge">required</small></td>
+</tr>
+<tr>
+<td>name <small>string</small></td>
+<td>The name of the customer.</td>
+</tr>
+<tr>
+<td>extra_id <small>string</small></td>
+<td>Additional ID that will help to identify this customer.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns a customer object if the call succeeded. If arguments are invalid, returns <a href=#errors>an error</a>.</p>
+
 <h2 id="retrieve-a-customer">Retrieve a customer</h2>
 
 <blockquote>
@@ -319,10 +385,11 @@ Extra ID is shown and returned only if the feature is activated for your product
 <p>Example Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1340573</span><span class="p">,</span><span class="w">
     </span><span class="nt">"stripe_id"</span><span class="p">:</span><span class="s2">"cus_1234ABCD"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"extra_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"tester@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -370,10 +437,11 @@ Extra ID is shown and returned only if the feature is activated for your product
 <p>Example Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1340573</span><span class="p">,</span><span class="w">
     </span><span class="nt">"stripe_id"</span><span class="p">:</span><span class="s2">"cus_1234ABCD"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"extra_id"</span><span class="p">:</span><span class="s2">"Team X"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"tester@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
