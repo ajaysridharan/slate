@@ -897,6 +897,141 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 <li><p>the date paid is invalid</p></li>
 </ul>
 
+          <h1 id="plans">Plans</h1>
+
+<p>Plans contains the information for creating subscriptions. Plans API allows you to create and retrieve plans.</p>
+
+<p>Until the point for retrieval is available, you can view your plans at <a href="https://www.firstofficer.io/plans">https://www.firstofficer.io/plans</a>.</p>
+
+<h2 id="the-plan-object">The plan object</h2>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"month"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"interval_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Plan"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <small>string</small></td>
+<td>Plan&rsquo;s unique ID. If plan exists in Stripe, Stripe id is returned.</td>
+</tr>
+<tr>
+<td>object <small>string</small></td>
+<td>Value is &ldquo;plan&rdquo;.</td>
+</tr>
+<tr>
+<td>amount <small>positive integer</small></td>
+<td>A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the total amount before discounts.</td>
+</tr>
+<tr>
+<td>name <small>string</small></td>
+<td>Display name of the plan.</td>
+</tr>
+<tr>
+<td>interval <small>string</small></td>
+<td>The billing frequency. Either &ldquo;day&rdquo;, &ldquo;week&rdquo;, &ldquo;month&rdquo; or &ldquo;year&rdquo;.</td>
+</tr>
+<tr>
+<td>interval_count <small>integer</small></td>
+<td>The number of intervals between each subscription billing. For example, interval=month and interval_count=3 means that subscription length is 3 months.</td>
+</tr>
+<tr>
+<td>currency <small>string</small></td>
+<td>3-letter ISO code for currency.</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-a-plan">Create a plan</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code> curl -X POST https://api.firstofficer.io/v2/plans <span class="se">\</span>
+    -u YourTokenHere: <span class="se">\</span>
+    -d <span class="nv">amount</span><span class="o">=</span>2000 <span class="se">\</span>
+    -d <span class="nv">interval</span><span class="o">=</span>month <span class="se">\</span>
+    -d <span class="nv">name</span><span class="o">=</span><span class="s2">"The Plan"</span> <span class="se">\</span>
+    -d <span class="nv">currency</span><span class="o">=</span>eur <span class="se">\</span>
+    -d <span class="nv">id</span><span class="o">=</span><span class="s2">"the-plan"</span>
+
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"month"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"interval_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Plan"</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.firstofficer.io/v2/plans</code></p>
+
+<p>Creates a plan.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <small>string</small></td>
+<td><small class="req-badge">required</small></td>
+</tr>
+<tr>
+<td>amount <small>positive integer</small></td>
+<td>A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the total amount before discounts.  <small class="req-badge">required</small></td>
+</tr>
+<tr>
+<td>name <small>string</small></td>
+<td>Display name of the plan. <small class="req-badge">required</small></td>
+</tr>
+<tr>
+<td>interval <small>string, default is &ldquo;month&rdquo;</small></td>
+<td>The billing frequency. Either &ldquo;day&rdquo;, &ldquo;week&rdquo;, &ldquo;month&rdquo; or &ldquo;year&rdquo;.</td>
+</tr>
+<tr>
+<td>interval_count <small>integer,default is 1</small></td>
+<td>The number of intervals between each subscription billing. For example, interval=month and interval_count=3 means that subscription length is 3 months.</td>
+</tr>
+<tr>
+<td>currency <small>string, default is &ldquo;usd&rdquo;</small></td>
+<td>3-letter ISO code for currency.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns the created plan object if call succeeds. If the plan ID does already exists, returns <a href=#errors>an error</a>.</p>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
