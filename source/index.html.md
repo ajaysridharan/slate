@@ -15,6 +15,7 @@ includes:
   - customers
   - mrr
   - invoices
+  - plans
 
 search: true
 ---
