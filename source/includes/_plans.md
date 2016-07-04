@@ -130,3 +130,66 @@ id <small>string</small> | The ID of the plan to be retrieved. If the plan is in
 ### Returns
 
 Returns a plan object if the call succeeded. If the plan ID does not exist, returns <a href=#errors>an error</a>.
+
+## List all plans
+
+> Example Request
+
+```ruby
+
+```
+
+
+```shell
+curl https://api.firstofficer.io/v2/plans?limit=2  \
+-u YourTokenHere:
+```
+
+> Example Response
+
+```json
+{
+    "object": "list",
+    "has_more": false,
+    "data": 
+    [
+        {
+            "id": "test",
+            "object": "plan",
+            "amount": 0,
+            "currency": "usd",
+            "interval": "month",
+            "interval_count": 1,
+            "name": "Test Plan"
+        },
+        {
+            "id": "test_2",
+            "object": "plan",
+            "amount": 0,
+            "currency": "usd",
+            "interval": "month",
+            "interval_count": 1,
+            "name": "Test Plan 2"    
+        }
+    ]
+ }
+```
+### HTTP Request
+
+`GET https://api.firstofficer.io/v2/plans`
+
+Returns a list of your plans
+
+### Arguments
+
+Argument | Description
+--------- | -------
+limit <small>optional integer<br>default is 10</small> | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+starting_after <small>optional, <br>plan's id </small> | A cursor to use in pagination. If there are more plans than can be returned in a single call, you can use <br><code>starting_after=id</code> <br>to retrieve the next page of plans. Id would be the id of the last plan returned in your previous request.
+
+### Returns
+
+An array of plans in the data property. Limit the number of plans returned in a single call by using limit argument. 
+Paginate through the plans by using starting_after argument. 
+
+This request should never return an error. If no more plans are available, an empty array is returned in data property.
