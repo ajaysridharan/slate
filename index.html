@@ -220,7 +220,7 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 </tr>
 </tbody></table>
 
-<p>Error Attributes</p>
+<p><strong>Error Attributes</strong></p>
 
 <table><thead>
 <tr>
@@ -413,13 +413,15 @@ Extra ID is shown and returned only if the feature is activated for your product
 </thead><tbody>
 <tr>
 <td>id <small>string</small></td>
-<td>The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small></td>
+<td>The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small></td>
 </tr>
 </tbody></table>
 
 <h3 id="returns">Returns</h3>
 
-<p>Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.</p>
+<p>Returns a customer object if the call succeeded. The extra_id and email arguments may match to several customers, but only one customer is returned. </p>
+
+<p>If the customer ID does not exist, returns <a href=#errors>an error</a>.</p>
 
 <h2 id="update-a-customer">Update a customer</h2>
 
@@ -466,7 +468,7 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
 </thead><tbody>
 <tr>
 <td>id <small>string</small></td>
-<td>The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small></td>
+<td>The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small></td>
 </tr>
 <tr>
 <td>extra_id <small>string</small></td>
@@ -476,7 +478,7 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
 
 <h3 id="returns">Returns</h3>
 
-<p>Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.</p>
+<p>Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.  </p>
 
           <h1 id="mrr">MRR</h1>
 
@@ -846,7 +848,7 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </thead><tbody>
 <tr>
 <td>customer <small>string</small></td>
-<td>The ID of the customer. Stripe ID, FO ID or email. <small class="req-badge">required</small></td>
+<td>The FirstOfficer ID of the customer. Stripe ID or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small></td>
 </tr>
 <tr>
 <td>plan <small>string</small></td>
@@ -910,6 +912,7 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
@@ -930,6 +933,10 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 <tr>
 <td>id <small>string</small></td>
 <td>Plan&rsquo;s unique ID. If plan exists in Stripe, Stripe id is returned.</td>
+</tr>
+<tr>
+<td>fo_id <small>integer</small></td>
+<td>Plan&rsquo;s unique ID in FirstOfficer.</td>
 </tr>
 <tr>
 <td>object <small>string</small></td>
@@ -979,6 +986,7 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="w"> </span><span class="p">{</span><span class="w">
    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"fo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
@@ -1031,6 +1039,56 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 <h3 id="returns">Returns</h3>
 
 <p>Returns the created plan object if call succeeds. If the plan ID does already exists, returns <a href=#errors>an error</a>.</p>
+
+<h2 id="retrieve-a-plan">Retrieve a plan</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/plans/1  <span class="se">\</span>
+-u YourTokenHere:
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"fo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"month"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"interval_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Plan"</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/plans/&lt;fo_id&gt;</code></p>
+
+<p>Retrieves the details of an existing plan.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fo_id <small>integer</small></td>
+<td>The FirstOfficer ID of the plan to be retrieved. <small class="req-badge">required</small></td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns a plan object if the call succeeded. If the plan ID does not exist, returns <a href=#errors>an error</a>.</p>
 
       </div>
       <div class="dark-box">
