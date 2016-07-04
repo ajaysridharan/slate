@@ -1083,6 +1083,78 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 
 <p>Returns a plan object if the call succeeded. If the plan ID does not exist, returns <a href=#errors>an error</a>.</p>
 
+<h2 id="list-all-plans">List all plans</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/plans?limit<span class="o">=</span>2  <span class="se">\</span>
+-u YourTokenHere:
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> 
+    </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"month"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"interval_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Plan"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_2"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"month"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"interval_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Plan 2"</span><span class="w">    
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/plans</code></p>
+
+<p>Returns a list of your plans</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit <small>optional integer<br>default is 10</small></td>
+<td>A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</td>
+</tr>
+<tr>
+<td>starting_after <small>optional, <br>plan&rsquo;s id </small></td>
+<td>A cursor to use in pagination. If there are more plans than can be returned in a single call, you can use <br><code>starting_after=id</code> <br>to retrieve the next page of plans. Id would be the id of the last plan returned in your previous request.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>An array of plans in the data property. Limit the number of plans returned in a single call by using limit argument. 
+Paginate through the plans by using starting_after argument. </p>
+
+<p>This request should never return an error. If no more plans are available, an empty array is returned in data property.</p>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
