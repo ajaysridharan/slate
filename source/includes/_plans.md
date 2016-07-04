@@ -11,7 +11,6 @@ Until the point for retrieval is available, you can view your plans at [https://
  ```json
   {
     "id": "test",
-    "fo_id": "1",
     "object": "plan",
     "amount": 0,
     "currency": "usd",
@@ -26,7 +25,6 @@ Until the point for retrieval is available, you can view your plans at [https://
  Attribute | Description
  --------- | -------
  id <small>string</small> | Plan's unique ID. If plan exists in Stripe, Stripe id is returned.
- fo_id <small>integer</small> | Plan's unique ID in FirstOfficer. 
  object <small>string</small> | Value is "plan".
  amount <small>positive integer</small> | A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the total amount before discounts. 
  name <small>string</small> | Display name of the plan.
@@ -60,7 +58,6 @@ Until the point for retrieval is available, you can view your plans at [https://
  ```json
  {
    "id": "test",
-   "fo_id": "1",
    "object": "plan",
    "amount": 0,
    "currency": "usd",
@@ -101,7 +98,7 @@ Until the point for retrieval is available, you can view your plans at [https://
 
 
 ```shell
-curl https://api.firstofficer.io/v2/plans/1  \
+curl https://api.firstofficer.io/v2/plans/test  \
 -u YourTokenHere:
 ```
 
@@ -110,7 +107,6 @@ curl https://api.firstofficer.io/v2/plans/1  \
 ```json
 {
    "id": "test",
-   "fo_id": "1",
    "object": "plan",
    "amount": 0,
    "currency": "usd",
@@ -121,7 +117,7 @@ curl https://api.firstofficer.io/v2/plans/1  \
 ```
 ### HTTP Request
 
-`GET https://api.firstofficer.io/v2/plans/<fo_id>`
+`GET https://api.firstofficer.io/v2/plans/<id>`
 
 Retrieves the details of an existing plan.
 
@@ -129,7 +125,7 @@ Retrieves the details of an existing plan.
 
 Argument | Description
 --------- | -------
-fo_id <small>integer</small> | The FirstOfficer ID of the plan to be retrieved. <small class="req-badge">required</small> 
+id <small>string</small> | The ID of the plan to be retrieved. If the plan is in Stripe, this is the Stripe ID. <small class="req-badge">required</small> 
 
 ### Returns
 
