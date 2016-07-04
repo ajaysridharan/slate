@@ -124,11 +124,13 @@ Retrieves the details of an existing customer.
 
 Argument | Description
 --------- | -------
-id <small>string</small> | The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small> 
+id <small>string</small> | The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small> 
 
 ### Returns
 
-Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.
+Returns a customer object if the call succeeded. The extra_id and email arguments may match to several customers, but only one customer is returned. 
+
+If the customer ID does not exist, returns <a href=#errors>an error</a>.
 
 ## Update a customer
 
@@ -171,9 +173,9 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
 
 Argument | Description
 --------- | -------
-id <small>string</small> | The identifier of the customer to be retrieved. Use Stripe ID, FirstOfficer ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email. <small class="req-badge">required</small>
+id <small>string</small> | The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small>
 extra_id <small>string</small> | Additional ID that will help to identify this customer. If this argument is omitted, extra_id is not changed. 
 
 ### Returns
 
-Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.
+Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.  

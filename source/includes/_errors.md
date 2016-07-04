@@ -29,7 +29,9 @@ Error Code | Meaning
 401 | Unauthorized -- No valid API key provided.
 404 | Not Found -- The requested object does not exist.
 
-Error Attributes
+
+
+__Error Attributes__
 
 Attribute | Description
 ---------- | -------

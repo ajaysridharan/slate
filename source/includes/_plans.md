@@ -11,6 +11,7 @@ Until the point for retrieval is available, you can view your plans at [https://
  ```json
   {
     "id": "test",
+    "fo_id": "1",
     "object": "plan",
     "amount": 0,
     "currency": "usd",
@@ -25,6 +26,7 @@ Until the point for retrieval is available, you can view your plans at [https://
  Attribute | Description
  --------- | -------
  id <small>string</small> | Plan's unique ID. If plan exists in Stripe, Stripe id is returned.
+ fo_id <small>integer</small> | Plan's unique ID in FirstOfficer. 
  object <small>string</small> | Value is "plan".
  amount <small>positive integer</small> | A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the total amount before discounts. 
  name <small>string</small> | Display name of the plan.
@@ -58,6 +60,7 @@ Until the point for retrieval is available, you can view your plans at [https://
  ```json
  {
    "id": "test",
+   "fo_id": "1",
    "object": "plan",
    "amount": 0,
    "currency": "usd",
@@ -87,3 +90,47 @@ Until the point for retrieval is available, you can view your plans at [https://
 ### Returns
  
  Returns the created plan object if call succeeds. If the plan ID does already exists, returns <a href=#errors>an error</a>.
+ 
+## Retrieve a plan
+
+> Example Request
+
+```ruby
+
+```
+
+
+```shell
+curl https://api.firstofficer.io/v2/plans/1  \
+-u YourTokenHere:
+```
+
+> Example Response
+
+```json
+{
+   "id": "test",
+   "fo_id": "1",
+   "object": "plan",
+   "amount": 0,
+   "currency": "usd",
+   "interval": "month",
+   "interval_count": 1,
+   "name": "Test Plan"
+ }
+```
+### HTTP Request
+
+`GET https://api.firstofficer.io/v2/plans/<fo_id>`
+
+Retrieves the details of an existing plan.
+
+### Arguments
+
+Argument | Description
+--------- | -------
+fo_id <small>integer</small> | The FirstOfficer ID of the plan to be retrieved. <small class="req-badge">required</small> 
+
+### Returns
+
+Returns a plan object if the call succeeded. If the plan ID does not exist, returns <a href=#errors>an error</a>.
