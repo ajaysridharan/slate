@@ -912,7 +912,6 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
@@ -933,10 +932,6 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 <tr>
 <td>id <small>string</small></td>
 <td>Plan&rsquo;s unique ID. If plan exists in Stripe, Stripe id is returned.</td>
-</tr>
-<tr>
-<td>fo_id <small>integer</small></td>
-<td>Plan&rsquo;s unique ID in FirstOfficer.</td>
 </tr>
 <tr>
 <td>object <small>string</small></td>
@@ -986,7 +981,6 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="w"> </span><span class="p">{</span><span class="w">
    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"fo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
@@ -1047,7 +1041,7 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </blockquote>
 <pre class="highlight ruby"><code>
 </code></pre>
-<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/plans/1  <span class="se">\</span>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/plans/test  <span class="se">\</span>
 -u YourTokenHere:
 </code></pre>
 
@@ -1056,7 +1050,6 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"fo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
@@ -1068,7 +1061,7 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://api.firstofficer.io/v2/plans/&lt;fo_id&gt;</code></p>
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/plans/&lt;id&gt;</code></p>
 
 <p>Retrieves the details of an existing plan.</p>
 
@@ -1081,8 +1074,8 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>fo_id <small>integer</small></td>
-<td>The FirstOfficer ID of the plan to be retrieved. <small class="req-badge">required</small></td>
+<td>id <small>string</small></td>
+<td>The ID of the plan to be retrieved. If the plan is in Stripe, this is the Stripe ID. <small class="req-badge">required</small></td>
 </tr>
 </tbody></table>
 
