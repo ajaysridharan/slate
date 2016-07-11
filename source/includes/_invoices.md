@@ -96,7 +96,7 @@ curl https://api.firstofficer.io/v2/invoices \
 
 
 <aside class="notice">
-At the moment you can only create invoices to existing plans and customers. That'll change when the customer and plan api points are ready.
+It is important to import invoices to a plan with the same interval. Do not import monthly subscriptions to an annual plan or vice versa.
 </aside>
 
 ### HTTP Request
@@ -108,6 +108,8 @@ Creates an invoice.
 You can view the imported invoices at [https://www.firstofficer.io/import_payments](https://www.firstofficer.io/import_payments) and see when they get processed.
 That's also where you can delete individual invoices if needed.
 
+Argument "plan" defines whether the invoice will be handled as a subscription or as a single purchase. If plan is present, it's a subscription. If plan is omitted, it's a one-time payment.
+
 ### Arguments
 
 Argument | Description
@@ -116,10 +118,12 @@ customer <small>string</small> | The FirstOfficer ID of the customer. Stripe ID 
 plan <small>string</small> | The ID of the plan. If plan is omitted, payment is booked only into revenue, not to MRR. 
 amount <small>integer</small> | A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the total amount before discounts. Optional when plan given.
 date_paid <small>ISO datetime</small> | ISO datetime representing when the payment was received. If date_paid is omitted, current time is used.
+date <small>ISO datetime</small> | ISO datetime representing when the invoice was created. If date is omitted, date_paid is used.
 discount <small>integer</small> | A positive integer representing the discount. Invoiced amount will be amount - discount.
 id <small>integer</small> | Unique identifier to prevent the same invoice from being imported twice. If id is omitted, it will be generated from date and customer id.
 quantity <small>integer</small> | The quantity of the seats used. If your plan is €10/user/month, you could pass 5 as the quantity to create an invoice of €50 (5 x €10).
-period_start <small>ISO datetime</small> | ISO datetime representing the subscription period start time. If period_start is omitted, date_paid is used.
+period_start <small>ISO datetime</small> | ISO datetime representing the subscription period start time. If period_start is omitted, date is used.
+period_end <small>ISO datetime</small> | ISO datetime representing the subscription period end time. If period_end is omitted and plan is given, period_end is calculated using the Plan's interval.
 currency <small>string</small> | Currency of the invoice, e.g. 'usd', 'eur'.
 description <small>string</small> | Free text describing what got invoiced.
 
