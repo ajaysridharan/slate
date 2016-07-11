@@ -179,3 +179,70 @@ extra_id <small>string</small> | Additional ID that will help to identify this c
 ### Returns
 
 Returns a customer object if the call succeeded. If the customer ID does not exist, returns <a href=#errors>an error</a>.  
+
+## List all customers
+
+> Example Request
+
+```ruby
+
+```
+
+
+```shell
+curl https://api.firstofficer.io/v2/customers?limit=2  \
+-u YourTokenHere:
+```
+
+> Example Response
+
+```json
+{
+    "object": "list",
+    "has_more": false,
+    "data": 
+    [
+        {
+            "id":1340573,
+            "stripe_id":"cus_1234ABCD",
+            "extra_id":"Team X",
+            "email":"tester@example.com",
+            "name":"John Doe",
+            "total_contract_value":629100,
+            "current_mrr":69900,
+            "current_subscription_count":1,
+            "currency":"usd"
+        },
+        {
+            "id":1340574,
+            "stripe_id":"cus_1234ABCE",
+            "extra_id":"Team Y",
+            "email":"tester2@example.com",
+            "name":"Jane Doe",
+            "total_contract_value":629100,
+            "current_mrr":69900,
+            "current_subscription_count":1,
+            "currency":"usd"    
+        }
+    ]
+ }
+```
+### HTTP Request
+
+`GET https://api.firstofficer.io/v2/customers`
+
+Returns a list of your customers
+
+### Arguments
+
+Argument | Description
+--------- | -------
+limit <small>optional integer<br>default is 10</small> | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+starting_after <small>optional, <br>customer's id </small> | A cursor to use in pagination. If there are more plans than can be returned in a single call, you can use <br><code>starting_after=id</code> <br>to retrieve the next page of customers. Id would be the id of the last customer returned in your previous request.
+
+### Returns
+
+An array of customers in the data property. Limit the number of customers returned in a single call by using limit argument. 
+Paginate through the customers by using starting_after argument. 
+
+This request should never return an error. If no more customers are available, an empty array is returned in data property.
