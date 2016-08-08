@@ -190,3 +190,80 @@ id <small>string</small> | The ID of the invoice to be retrieved. <small class="
 Returns an invoice object if the call succeeded. Only one invoice is returned. 
 
 If the invoice ID does not exist, returns <a href=#errors>an error</a>.
+
+## List all invoices
+
+> Example Request
+
+```ruby
+
+```
+
+
+```shell
+curl https://api.firstofficer.io/v2/invoices?limit=2  \
+-u YourTokenHere:
+```
+
+> Example Response
+
+```json
+{
+    "object": "list",
+    "has_more": false,
+    "data": 
+    [
+        {
+            "id": "in_1",
+            "object": "invoice",
+            "amount_paid": 2900,
+            "discount": 0,
+            "amount": 2900,
+            "currency": "usd",
+            "customer": "cus_A",
+            "plan": "hobby_monthly",
+            "date_paid": "2016-05-05T10:26:26+00:00",
+            "date": "2016-05-05T10:26:26+00:00",
+            "quantity": 1,
+            "period_start": "2016-05-05T10:26:26+00:00",
+            "period_end": "2016-06-05T10:26:26+00:00",
+            "description": ""
+        },
+        {
+            "id": "in_2",
+            "object": "invoice",
+            "amount_paid": 2900,
+            "discount": 0,
+            "amount": 2900,
+            "currency": "usd",
+            "customer": "cus_B",
+            "plan": "hobby_monthly",
+            "date_paid": "2016-05-05T10:26:26+00:00",
+            "date": "2016-05-05T10:26:26+00:00",
+            "quantity": 1,
+            "period_start": "2016-05-05T10:26:26+00:00",
+            "period_end": "2016-06-05T10:26:26+00:00",
+            "description": ""
+        }
+    ]
+ }
+```
+### HTTP Request
+
+`GET https://api.firstofficer.io/v2/invoices`
+
+Returns a list of your invoices. Only returns invoices created through this API. List Stripe invoices through [the invoices endpoint in Stripe API](https://stripe.com/docs/api#invoices).
+
+### Arguments
+
+Argument | Description
+--------- | -------
+limit <small>optional integer<br>default is 10</small> | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+starting_after <small>optional, <br>plan's id </small> | A cursor to use in pagination. If there are more items than can be returned in a single call, you can use <br><code>starting_after=id</code> <br>to retrieve the next page of items. Id would be the id of the last item returned in your previous request.
+
+### Returns
+
+An array of invoices in the data property. Limit the number of invoices returned in a single call by using limit argument. 
+Paginate through the invoices by using starting_after argument. 
+
+This request should never return an error. If no more invoices are available, an empty array is returned in data property.
