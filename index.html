@@ -1044,6 +1044,92 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 
 <p>If the invoice ID does not exist, returns <a href=#errors>an error</a>.</p>
 
+<h2 id="list-all-invoices">List all invoices</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/invoices?limit<span class="o">=</span>2  <span class="se">\</span>
+-u YourTokenHere:
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"has_more"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> 
+    </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_1"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount_paid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_A"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hobby_monthly"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"date_paid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"period_start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_2"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount_paid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_B"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hobby_monthly"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"date_paid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"period_start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/invoices</code></p>
+
+<p>Returns a list of your invoices. Only returns invoices created through this API. List Stripe invoices through <a href="https://stripe.com/docs/api#invoices">the invoices endpoint in Stripe API</a>.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit <small>optional integer<br>default is 10</small></td>
+<td>A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</td>
+</tr>
+<tr>
+<td>starting_after <small>optional, <br>plan&rsquo;s id </small></td>
+<td>A cursor to use in pagination. If there are more items than can be returned in a single call, you can use <br><code>starting_after=id</code> <br>to retrieve the next page of items. Id would be the id of the last item returned in your previous request.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>An array of invoices in the data property. Limit the number of invoices returned in a single call by using limit argument. 
+Paginate through the invoices by using starting_after argument. </p>
+
+<p>This request should never return an error. If no more invoices are available, an empty array is returned in data property.</p>
+
           <h1 id="plans">Plans</h1>
 
 <p>Plans contains the information for creating subscriptions. Plans API allows you to create and retrieve plans.</p>
