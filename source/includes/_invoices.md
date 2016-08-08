@@ -65,7 +65,7 @@ description <small>string</small> |
 
 
 ```shell
-curl https://api.firstofficer.io/v2/invoices \
+curl -X POST https://api.firstofficer.io/v2/invoices \
    -u YourTokenHere: \
    -d customer=cus_ABCD \
    -d plan=hobby_monthly \
@@ -137,4 +137,56 @@ Returns an error if:
 
 * the date paid is invalid
 
+## Retrieve an invoice
 
+> Example Request
+
+```ruby
+
+```
+
+
+```shell
+curl https://api.firstofficer.io/v2/invoices/in_123456 \
+   -u YourTokenHere: 
+
+```
+
+> Example Response
+
+```json
+{
+    "id": "in_123456",
+    "object": "invoice",
+    "amount_paid": 2900,
+    "discount": 0,
+    "amount": 2900,
+    "currency": "usd",
+    "customer": "cus_ABCD",
+    "plan": "hobby_monthly",
+    "date_paid": "2016-05-05T10:26:26+00:00",
+    "date": "2016-05-05T10:26:26+00:00",
+    "quantity": 1,
+    "period_start": "2016-05-05T10:26:26+00:00",
+    "period_end": "2016-06-05T10:26:26+00:00",
+    "description": ""
+}   
+```
+
+### HTTP Request
+
+`GET https://api.firstofficer.io/v2/invoices/<id>`
+
+Retrieves the details of an existing invoice. Only returns invoices created through this API. Retrieve Stripe invoices through [the invoices endpoint in Stripe API](https://stripe.com/docs/api#invoices).
+
+### Arguments
+
+Argument | Description
+--------- | -------
+id <small>string</small> | The ID of the invoice to be retrieved. <small class="req-badge">required</small> 
+
+### Returns
+
+Returns an invoice object if the call succeeded. Only one invoice is returned. 
+
+If the invoice ID does not exist, returns <a href=#errors>an error</a>.
