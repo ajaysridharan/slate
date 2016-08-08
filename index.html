@@ -872,7 +872,7 @@ This means your metrics will not update right away after you&rsquo;ve imported t
 </blockquote>
 <pre class="highlight ruby"><code>
 </code></pre>
-<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/invoices <span class="se">\</span>
+<pre class="highlight shell"><code>curl -X POST https://api.firstofficer.io/v2/invoices <span class="se">\</span>
    -u YourTokenHere: <span class="se">\</span>
    -d <span class="nv">customer</span><span class="o">=</span>cus_ABCD <span class="se">\</span>
    -d <span class="nv">plan</span><span class="o">=</span>hobby_monthly <span class="se">\</span>
@@ -984,6 +984,65 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 <li><p>the customer or plan ID provided is invalid</p></li>
 <li><p>the date paid is invalid</p></li>
 </ul>
+
+<h2 id="retrieve-an-invoice">Retrieve an invoice</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/invoices/in_123456 <span class="se">\</span>
+   -u YourTokenHere: 
+
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount_paid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_ABCD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hobby_monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_paid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"period_start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-05T10:26:26+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+</span><span class="p">}</span><span class="w">   
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/invoices/&lt;id&gt;</code></p>
+
+<p>Retrieves the details of an existing invoice. Only returns invoices created through this API. Retrieve Stripe invoices through <a href="https://stripe.com/docs/api#invoices">the invoices endpoint in Stripe API</a>.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <small>string</small></td>
+<td>The ID of the invoice to be retrieved. <small class="req-badge">required</small></td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns an invoice object if the call succeeded. Only one invoice is returned. </p>
+
+<p>If the invoice ID does not exist, returns <a href=#errors>an error</a>.</p>
 
           <h1 id="plans">Plans</h1>
 
