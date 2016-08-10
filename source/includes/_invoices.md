@@ -191,6 +191,53 @@ Returns an invoice object if the call succeeded. Only one invoice is returned.
 
 If the invoice ID does not exist, returns <a href=#errors>an error</a>.
 
+## Delete an invoice
+
+> Example Request
+
+```ruby
+
+```
+
+
+```shell
+curl https://api.firstofficer.io/v2/invoices/in_123456 \
+   -u YourTokenHere: \
+    -X DELETE
+
+```
+
+> Example Response
+
+```json
+{
+  "deleted": true,
+  "id": "in_123456"
+}
+```
+
+### HTTP Request
+
+`DELETE https://api.firstofficer.io/v2/invoices/<id>`
+
+Permanently deletes an invoice. It cannot be undone.
+
+<aside class="notice">
+Changes in invoices are processed during the next metrics recalculation, usually within one hour. 
+This means your metrics will not update right away after you've deleted the invoice.
+</aside>
+
+
+### Arguments
+
+Argument | Description
+--------- | -------
+id <small>string</small> | The ID of the invoice to be deleted. <small class="req-badge">required</small> 
+
+### Returns
+
+Returns an object with a deleted parameter on success. If the invoice ID does not exist, this call returns an error.
+
 ## List all invoices
 
 > Example Request
