@@ -1044,6 +1044,57 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 
 <p>If the invoice ID does not exist, returns <a href=#errors>an error</a>.</p>
 
+<h2 id="delete-an-invoice">Delete an invoice</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/invoices/in_123456 <span class="se">\</span>
+   -u YourTokenHere: <span class="se">\</span>
+    -X DELETE
+
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_123456"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://api.firstofficer.io/v2/invoices/&lt;id&gt;</code></p>
+
+<p>Permanently deletes an invoice. It cannot be undone.</p>
+
+<aside class="notice">
+Changes in invoices are processed during the next metrics recalculation, usually within one hour. 
+This means your metrics will not update right away after you&rsquo;ve deleted the invoice.
+</aside>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <small>string</small></td>
+<td>The ID of the invoice to be deleted. <small class="req-badge">required</small></td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns an object with a deleted parameter on success. If the invoice ID does not exist, this call returns an error.</p>
+
 <h2 id="list-all-invoices">List all invoices</h2>
 
 <blockquote>
