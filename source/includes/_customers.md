@@ -1,6 +1,8 @@
 # Customers
 
-Customers API allows you to retrieve a snapshot of your customer's metrics. You can also update their extra IDs.   
+Customers API allows you to retrieve a snapshot of your customer's metrics. You can also update their data. 
+  
+FirstOfficer cannot change the data in Stripe, so changes done here will not affect customer billing or their data in Stripe. 
 
 ## The customer object
 
@@ -174,7 +176,9 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
 Argument | Description
 --------- | -------
 id <small>string</small> | The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small>
-extra_id <small>string</small> | Additional ID that will help to identify this customer. If this argument is omitted, extra_id is not changed. 
+extra_id <small>string</small> | Additional ID that will help to identify this customer. If this argument is omitted, extra_id is not changed.
+email <small>string</small> | The email of the customer, unique. 
+name <small>string</small> | The name of the customer.
 
 ### Returns
 

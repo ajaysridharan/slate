@@ -2,6 +2,8 @@
 
 Invoices API allows you to import non-Stripe payments to FirstOfficer. 
 
+FirstOfficer cannot change the data in Stripe, so any changes done here will not affect customer billing.
+
 Imported invoices will be processed during the next metrics recalculation, usually within one hour. 
 This means your metrics will not update right away after you've imported the invoice. 
 
@@ -19,7 +21,8 @@ You will be able to see the imported invoice in customer's page, which you can a
 
 ```json
 {
-    "id": "sub_man_2313372_1462443986",
+    "id": "1462443986",
+    "subscription_id": "sub_man_2313372_1462443986",
     "object": "invoice",
     "amount_paid": 2900,
     "discount": 0,
@@ -41,6 +44,7 @@ You will be able to see the imported invoice in customer's page, which you can a
 Attribute | Description
 --------- | -------
 id <small>integer</small> | Unique identifier.
+subscription_id <small>string</small> | Identifier of the subscription.
 object <small>string</small> | Object type, value is "invoice".
 amount_paid <small>integer</small> | A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the invoiced amount.
 discount <small>integer</small> | A positive integer representing the discount. Invoice total will be amount - discount.
@@ -55,7 +59,7 @@ period_start <small>ISO datetime</small> | ISO datetime representing the subscri
 period_end <small>ISO datetime</small> | ISO datetime representing the subscription period end time.
 description <small>string</small> |
 
-## Import an invoice
+## Create an invoice
 
 > Example Request
 
@@ -103,7 +107,7 @@ It is important to import invoices to a plan with the same interval. Do not impo
 
 `POST https://api.firstofficer.io/v2/invoices`
 
-Creates an invoice. 
+Creates an invoice for metrics calculation. 
 
 You can view the imported invoices at [https://www.firstofficer.io/import_payments](https://www.firstofficer.io/import_payments) and see when they get processed.
 That's also where you can delete individual invoices if needed.
@@ -120,7 +124,8 @@ amount <small>integer</small> | A positive integer in the smallest currency unit
 date_paid <small>ISO datetime</small> | ISO datetime representing when the payment was received. If date_paid is omitted, current time is used.
 date <small>ISO datetime</small> | ISO datetime representing when the invoice was created. If date is omitted, date_paid is used.
 discount <small>integer</small> | A positive integer representing the discount. Invoiced amount will be amount - discount.
-id <small>integer</small> | Unique identifier to prevent the same invoice from being imported twice. If id is omitted, it will be generated from date and customer id.
+id <small>integer</small> | Unique identifier to prevent the same invoice from being imported twice. If id is omitted, it will be generated.
+subscription_id <small>string</small> | Use this to continue or upgrade existing subscription or to add quantities to it. 
 quantity <small>integer</small> | The quantity of the seats used. If your plan is €10/user/month, you could pass 5 as the quantity to create an invoice of €50 (5 x €10).
 period_start <small>ISO datetime</small> | ISO datetime representing the subscription period start time. If period_start is omitted, date is used.
 period_end <small>ISO datetime</small> | ISO datetime representing the subscription period end time. If period_end is omitted and plan is given, period_end is calculated using the Plan's interval.

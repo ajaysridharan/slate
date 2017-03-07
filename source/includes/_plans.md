@@ -1,8 +1,8 @@
 # Plans
 
 Plans contains the information for creating subscriptions. Plans API allows you to create and retrieve plans.
- 
-Until the point for retrieval is available, you can view your plans at [https://www.firstofficer.io/plans](https://www.firstofficer.io/plans).
+
+FirstOfficer cannot change the data in Stripe, so any changes done here will not affect customer billing.
  
 ## The plan object
  
@@ -133,6 +133,8 @@ Returns a plan object if the call succeeded. If the plan ID does not exist, retu
 
 ## List all plans
 
+You can also view a list of your plans at [https://www.firstofficer.io/plans](https://www.firstofficer.io/plans).
+
 > Example Request
 
 ```ruby
@@ -178,7 +180,7 @@ curl https://api.firstofficer.io/v2/plans?limit=2  \
 
 `GET https://api.firstofficer.io/v2/plans`
 
-Returns a list of your plans
+Returns a list of your plans.
 
 ### Arguments
 
