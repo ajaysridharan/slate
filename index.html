@@ -244,7 +244,9 @@ You must replace <code>YourTokenHere</code> with your personal API key.
 
           <h1 id="customers">Customers</h1>
 
-<p>Customers API allows you to retrieve a snapshot of your customer&rsquo;s metrics. You can also update their extra IDs.   </p>
+<p>Customers API allows you to retrieve a snapshot of your customer&rsquo;s metrics. You can also update their data. </p>
+
+<p>FirstOfficer cannot change the data in Stripe, so changes done here will not affect customer billing or their data in Stripe. </p>
 
 <h2 id="the-customer-object">The customer object</h2>
 
@@ -473,6 +475,14 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
 <tr>
 <td>extra_id <small>string</small></td>
 <td>Additional ID that will help to identify this customer. If this argument is omitted, extra_id is not changed.</td>
+</tr>
+<tr>
+<td>email <small>string</small></td>
+<td>The email of the customer, unique.</td>
+</tr>
+<tr>
+<td>name <small>string</small></td>
+<td>The name of the customer.</td>
 </tr>
 </tbody></table>
 
@@ -765,6 +775,8 @@ Paginate through the customers by using starting_after argument. </p>
 
 <p>Invoices API allows you to import non-Stripe payments to FirstOfficer. </p>
 
+<p>FirstOfficer cannot change the data in Stripe, so any changes done here will not affect customer billing.</p>
+
 <p>Imported invoices will be processed during the next metrics recalculation, usually within one hour. 
 This means your metrics will not update right away after you&rsquo;ve imported the invoice. </p>
 
@@ -782,7 +794,8 @@ This means your metrics will not update right away after you&rsquo;ve imported t
 <p>Example Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub_man_2313372_1462443986"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1462443986"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub_man_2313372_1462443986"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount_paid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -810,6 +823,10 @@ This means your metrics will not update right away after you&rsquo;ve imported t
 <tr>
 <td>id <small>integer</small></td>
 <td>Unique identifier.</td>
+</tr>
+<tr>
+<td>subscription_id <small>string</small></td>
+<td>Identifier of the subscription.</td>
 </tr>
 <tr>
 <td>object <small>string</small></td>
@@ -865,7 +882,7 @@ This means your metrics will not update right away after you&rsquo;ve imported t
 </tr>
 </tbody></table>
 
-<h2 id="import-an-invoice">Import an invoice</h2>
+<h2 id="create-an-invoice">Create an invoice</h2>
 
 <blockquote>
 <p>Example Request</p>
@@ -909,7 +926,7 @@ It is important to import invoices to a plan with the same interval. Do not impo
 
 <p><code class="prettyprint">POST https://api.firstofficer.io/v2/invoices</code></p>
 
-<p>Creates an invoice. </p>
+<p>Creates an invoice for metrics calculation. </p>
 
 <p>You can view the imported invoices at <a href="https://www.firstofficer.io/import_payments">https://www.firstofficer.io/import_payments</a> and see when they get processed.
 That&rsquo;s also where you can delete individual invoices if needed.</p>
@@ -950,7 +967,11 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </tr>
 <tr>
 <td>id <small>integer</small></td>
-<td>Unique identifier to prevent the same invoice from being imported twice. If id is omitted, it will be generated from date and customer id.</td>
+<td>Unique identifier to prevent the same invoice from being imported twice. If id is omitted, it will be generated.</td>
+</tr>
+<tr>
+<td>subscription_id <small>string</small></td>
+<td>Use this to continue or upgrade existing subscription or to add quantities to it.</td>
 </tr>
 <tr>
 <td>quantity <small>integer</small></td>
@@ -1185,7 +1206,7 @@ Paginate through the invoices by using starting_after argument. </p>
 
 <p>Plans contains the information for creating subscriptions. Plans API allows you to create and retrieve plans.</p>
 
-<p>Until the point for retrieval is available, you can view your plans at <a href="https://www.firstofficer.io/plans">https://www.firstofficer.io/plans</a>.</p>
+<p>FirstOfficer cannot change the data in Stripe, so any changes done here will not affect customer billing.</p>
 
 <h2 id="the-plan-object">The plan object</h2>
 
@@ -1367,6 +1388,8 @@ Paginate through the invoices by using starting_after argument. </p>
 
 <h2 id="list-all-plans">List all plans</h2>
 
+<p>You can also view a list of your plans at <a href="https://www.firstofficer.io/plans">https://www.firstofficer.io/plans</a>.</p>
+
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -1410,7 +1433,7 @@ Paginate through the invoices by using starting_after argument. </p>
 
 <p><code class="prettyprint">GET https://api.firstofficer.io/v2/plans</code></p>
 
-<p>Returns a list of your plans</p>
+<p>Returns a list of your plans.</p>
 
 <h3 id="arguments">Arguments</h3>
 
