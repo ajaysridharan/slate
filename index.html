@@ -263,7 +263,7 @@ You must replace <code>YourTokenHere</code> with your personal API key.
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
     </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -312,6 +312,14 @@ Extra ID is shown and returned only if the feature is activated for your product
 <td>currency <small>string</small></td>
 <td>The currency for this customer, e.g. &ldquo;usd&rdquo;, &ldquo;eur&rdquo;</td>
 </tr>
+<tr>
+<td>country <small>string</small></td>
+<td>The country for this customer, e.g. “US”, “FI”</td>
+</tr>
+<tr>
+<td>state <small>string</small></td>
+<td>The US state for this customer, e.g. “OH”, “CA”. If customer does not reside in the US, the state will be empty.</td>
+</tr>
 </tbody></table>
 
 <h2 id="create-a-customer">Create a customer</h2>
@@ -339,7 +347,7 @@ Extra ID is shown and returned only if the feature is activated for your product
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
     </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -400,7 +408,7 @@ Extra ID is shown and returned only if the feature is activated for your product
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
     </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -456,7 +464,7 @@ Extra ID is shown and returned only if the feature is activated for your product
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
     </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -527,7 +535,7 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
             </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
             </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -540,7 +548,7 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
             </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
             </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">    
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
