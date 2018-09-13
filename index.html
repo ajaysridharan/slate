@@ -262,7 +262,9 @@ You must replace <code>YourTokenHere</code> with your personal API key.
     </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -336,7 +338,9 @@ Extra ID is shown and returned only if the feature is activated for your product
     </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -395,7 +399,9 @@ Extra ID is shown and returned only if the feature is activated for your product
     </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -415,13 +421,13 @@ Extra ID is shown and returned only if the feature is activated for your product
 </thead><tbody>
 <tr>
 <td>id <small>string</small></td>
-<td>The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small></td>
+<td>The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small></td>
 </tr>
 </tbody></table>
 
 <h3 id="returns">Returns</h3>
 
-<p>Returns a customer object if the call succeeded. The extra_id and email arguments may match to several customers, but only one customer is returned. </p>
+<p>Returns a customer object if the call succeeded. The extra_id arguments may match to several customers, but only one customer is returned. </p>
 
 <p>If the customer ID does not exist, returns <a href=#errors>an error</a>.</p>
 
@@ -449,7 +455,9 @@ Extra ID is shown and returned only if the feature is activated for your product
     </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
     </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -470,7 +478,7 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
 </thead><tbody>
 <tr>
 <td>id <small>string</small></td>
-<td>The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small></td>
+<td>The FirstOfficer ID of the customer to be retrieved. Stripe ID or <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small></td>
 </tr>
 <tr>
 <td>extra_id <small>string</small></td>
@@ -518,7 +526,9 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
             </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
             </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
             </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">
+            </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1340574</span><span class="p">,</span><span class="w">
@@ -529,7 +539,9 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
             </span><span class="nt">"total_contract_value"</span><span class="p">:</span><span class="mi">629100</span><span class="p">,</span><span class="w">
             </span><span class="nt">"current_mrr"</span><span class="p">:</span><span class="mi">69900</span><span class="p">,</span><span class="w">
             </span><span class="nt">"current_subscription_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="w">    
+            </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45701"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OH"</span><span class="w">    
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
  </span><span class="p">}</span><span class="w">
@@ -943,7 +955,7 @@ That&rsquo;s also where you can delete individual invoices if needed.</p>
 </thead><tbody>
 <tr>
 <td>customer <small>string</small></td>
-<td>The FirstOfficer ID of the customer. Stripe ID or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small></td>
+<td>The FirstOfficer ID of the customer. Stripe ID will also work, but is deprecated and will be removed in V3. <small class="req-badge">required</small></td>
 </tr>
 <tr>
 <td>plan <small>string</small></td>
