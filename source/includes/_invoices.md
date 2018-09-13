@@ -118,7 +118,7 @@ Argument "plan" defines whether the invoice will be handled as a subscription or
 
 Argument | Description
 --------- | -------
-customer <small>string</small> | The FirstOfficer ID of the customer. Stripe ID or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small> 
+customer <small>string</small> | The FirstOfficer ID of the customer. Stripe ID will also work, but is deprecated and will be removed in V3. <small class="req-badge">required</small> 
 plan <small>string</small> | The ID of the plan. If plan is omitted, payment is booked only into revenue, not to MRR. 
 amount <small>integer</small> | A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00) representing the total amount before discounts. Optional when plan given.
 date_paid <small>ISO datetime</small> | ISO datetime representing when the payment was received. If date_paid is omitted, current time is used.

@@ -18,7 +18,9 @@ FirstOfficer cannot change the data in Stripe, so changes done here will not aff
     "total_contract_value":629100,
     "current_mrr":69900,
     "current_subscription_count":1,
-    "currency":"usd"
+    "currency":"usd",
+    "zip_code": "45701", 
+    "state": "OH"
 }
 ```
 
@@ -66,7 +68,9 @@ curl -X POST https://api.firstofficer.io/v2/customers  \
     "total_contract_value":629100,
     "current_mrr":69900,
     "current_subscription_count":1,
-    "currency":"usd"
+    "currency":"usd",
+    "zip_code": "45701", 
+    "state": "OH"
 }
 ```
 ### HTTP Request
@@ -113,7 +117,9 @@ curl https://api.firstofficer.io/v2/customers/cus_1234ABCD  \
     "total_contract_value":629100,
     "current_mrr":69900,
     "current_subscription_count":1,
-    "currency":"usd"
+    "currency":"usd",
+    "zip_code": "45701", 
+    "state": "OH"
 }
 ```
 ### HTTP Request
@@ -126,11 +132,11 @@ Retrieves the details of an existing customer.
 
 Argument | Description
 --------- | -------
-id <small>string</small> | The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small> 
+id <small>string</small> | The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small> 
 
 ### Returns
 
-Returns a customer object if the call succeeded. The extra_id and email arguments may match to several customers, but only one customer is returned. 
+Returns a customer object if the call succeeded. The extra_id arguments may match to several customers, but only one customer is returned. 
 
 If the customer ID does not exist, returns <a href=#errors>an error</a>.
 
@@ -161,7 +167,9 @@ curl -X PUT https://api.firstofficer.io/v2/customers/7598372  \
     "total_contract_value":629100,
     "current_mrr":69900,
     "current_subscription_count":1,
-    "currency":"usd"
+    "currency":"usd",
+    "zip_code": "45701", 
+    "state": "OH"
 }
 ```
 ### HTTP Request
@@ -175,7 +183,7 @@ If there is conflicting data in Stripe, the data in Stripe will override any dat
 
 Argument | Description
 --------- | -------
-id <small>string</small> | The FirstOfficer ID of the customer to be retrieved. Stripe ID, <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> or email will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small>
+id <small>string</small> | The FirstOfficer ID of the customer to be retrieved. Stripe ID or <a href='https://www.firstofficer.io/activate_ext_id'>Extra ID</a> will also work, but are deprecated and will be removed in V3. <small class="req-badge">required</small>
 extra_id <small>string</small> | Additional ID that will help to identify this customer. If this argument is omitted, extra_id is not changed.
 email <small>string</small> | The email of the customer, unique. 
 name <small>string</small> | The name of the customer.
@@ -215,7 +223,9 @@ curl https://api.firstofficer.io/v2/customers?limit=2  \
             "total_contract_value":629100,
             "current_mrr":69900,
             "current_subscription_count":1,
-            "currency":"usd"
+            "currency":"usd",
+            "zip_code": "45701", 
+            "state": "OH"
         },
         {
             "id":1340574,
@@ -226,7 +236,9 @@ curl https://api.firstofficer.io/v2/customers?limit=2  \
             "total_contract_value":629100,
             "current_mrr":69900,
             "current_subscription_count":1,
-            "currency":"usd"    
+            "currency":"usd",
+            "zip_code": "45701", 
+            "state": "OH"    
         }
     ]
  }
