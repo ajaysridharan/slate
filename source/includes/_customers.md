@@ -19,7 +19,7 @@ FirstOfficer cannot change the data in Stripe, so changes done here will not aff
     "current_mrr":69900,
     "current_subscription_count":1,
     "currency":"usd",
-    "zip_code": "45701", 
+    "country": "US", 
     "state": "OH"
 }
 ```
@@ -40,6 +40,8 @@ total_contract_value <small>integer</small> | The realized customer lifetime val
 current_mrr <small>integer</small> | MRR in the current month
 current_subscription_count <small>integer</small> | Subscription count in the current month. When subscription count is zero, customer is lost. This does not relate to the real-time active/cancelled subscriptions in Stripe, but customer's status in bookkeeping. Reflects the subscriptions that contributed to MRR.
 currency <small>string</small> | The currency for this customer, e.g. "usd", "eur"
+country <small>string</small> | The country for this customer, e.g. “US”, “FI”
+state <small>string</small> | The US state for this customer, e.g. “OH”, “CA”. If customer does not reside in the US, the state will be empty.
 
 ## Create a customer
 
@@ -69,7 +71,7 @@ curl -X POST https://api.firstofficer.io/v2/customers  \
     "current_mrr":69900,
     "current_subscription_count":1,
     "currency":"usd",
-    "zip_code": "45701", 
+    "country": "US", 
     "state": "OH"
 }
 ```
@@ -118,7 +120,7 @@ curl https://api.firstofficer.io/v2/customers/cus_1234ABCD  \
     "current_mrr":69900,
     "current_subscription_count":1,
     "currency":"usd",
-    "zip_code": "45701", 
+    "country": "US", 
     "state": "OH"
 }
 ```
@@ -168,7 +170,7 @@ curl -X PUT https://api.firstofficer.io/v2/customers/7598372  \
     "current_mrr":69900,
     "current_subscription_count":1,
     "currency":"usd",
-    "zip_code": "45701", 
+    "country": "US", 
     "state": "OH"
 }
 ```
@@ -224,7 +226,7 @@ curl https://api.firstofficer.io/v2/customers?limit=2  \
             "current_mrr":69900,
             "current_subscription_count":1,
             "currency":"usd",
-            "zip_code": "45701", 
+            "country": "US", 
             "state": "OH"
         },
         {
@@ -237,7 +239,7 @@ curl https://api.firstofficer.io/v2/customers?limit=2  \
             "current_mrr":69900,
             "current_subscription_count":1,
             "currency":"usd",
-            "zip_code": "45701", 
+            "country": "US", 
             "state": "OH"    
         }
     ]
