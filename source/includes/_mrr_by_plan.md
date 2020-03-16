@@ -42,8 +42,8 @@ new_mrr <small>integer</small> | MRR from new and returning customers
 beginning_mrr <small>integer</small> | 
 upgrade_mrr <small>integer</small> | MRR from upgrades to higher priced plans and increased seats. Change from monthly to annual 
 downgrade_mrr <small>integer</small> | MRR from downgrades to lower priced plans and decreased seats 
-moved_in_mrr <small>integer</small>
-moved_out_mrr <small>integer</small>
+moved_in_mrr <small>integer</small> | 
+moved_out_mrr <small>integer</small>| 
 waiting_mrr <small>integer</small> | Expected MRR from subscriptions to be charged. Only shown for current month. The MRR already 
 plan_name <small>string</small>  | Plan name
 plan_eid <small>string</small> | Plan eid (as set in Stripe). (non-null)
