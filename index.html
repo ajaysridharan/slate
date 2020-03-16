@@ -791,6 +791,222 @@ Paginate through the customers by using starting_after argument. </p>
 
 <p>Returns a MRR object if the call succeeded. If the month does not have any data, returns and empty JSON.</p>
 
+          <h1 id="mrr-by-plan">MRR by Plan</h1>
+
+<p>MRR by Plan API allows you to retrieve Monthly Recurring Revenue broken down by plans.</p>
+
+<h2 id="the-mrr-by-plan-object">The MRR by Plan object</h2>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">24900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_of_term_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_of_term_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">24900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"new_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"beginning_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"upgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"downgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"moved_in_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"moved_out_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"waiting_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_eid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"business monthly"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>month <small>ISO date string</small></td>
+<td>The first day of the returned month</td>
+</tr>
+<tr>
+<td>total_mrr <small>integer</small></td>
+<td>MRR. When retrieved for current month, includes only MRR charged by current date and MRR from</td>
+</tr>
+</tbody></table>
+
+<p>total_customers
+end_of_term_customers
+lost_customers <small>integer</small> | Number of customers who stopped paying
+end_of_term_mrr
+lost_mrr <small>integer</small> | MRR from customers who stopped paying 
+new_mrr <small>integer</small> | MRR from new and returning customers
+beginning_mrr
+upgrade_mrr <small>integer</small> | MRR from upgrades to higher priced plans and increased seats. Change from monthly to annual 
+downgrade_mrr <small>integer</small> | MRR from downgrades to lower priced plans and decreased seats 
+moved_in_mrr
+moved_out_mrr
+waiting_mrr <small>integer</small> | Expected MRR from subscriptions to be charged. Only shown for current month. The MRR already 
+plan_name
+plan_eid</p>
+
+<h2 id="retrieve-yearly-mrr-by-plans">Retrieve Yearly MRR by Plans</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/mrr_by_plan?interval<span class="o">=</span>year  <span class="se">\</span>
+-u YourTokenHere:
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[{</span><span class="w">
+    </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2012</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"mrr_by_plan"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"total_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">264500</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"end_of_term_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lost_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"end_of_term_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">168000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lost_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">-10000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"new_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">106500</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"beginning_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"upgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"downgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"moved_in_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"moved_out_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"waiting_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"eid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2013</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"mrr_by_plan"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"total_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">234567</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"end_of_term_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lost_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"end_of_term_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">887000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lost_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">-30000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"new_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">120000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"beginning_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"upgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"downgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"moved_in_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"moved_out_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"waiting_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"eid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"business-mon"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"business-monthly"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/mrr_by_plan?interval=year</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>interval <small>string</small></td>
+<td>The interval type by which MRR would get aggregated.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns a list of MRR objects grouped by plans and aggregated on a yearly basis. By default, the response only contains data for the last 3 years.</p>
+
+<h2 id="retrieve-monthly-rr-by-plans">Retrieve Monthly RR by Plans</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight ruby"><code>
+</code></pre>
+<pre class="highlight shell"><code>curl https://api.firstofficer.io/v2/mrr_by_plan?start_month<span class="o">=</span>2019-01-01&amp;end_month<span class="o">=</span>2019-02-01  <span class="se">\</span>
+-u YourTokenHere:
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[{</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">24900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_of_term_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_of_term_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">24900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"new_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"beginning_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"upgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"downgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"moved_in_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"moved_out_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"waiting_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_eid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"business monthly"</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">24950</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_of_term_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_customers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_of_term_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">24950</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lost_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"new_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"beginning_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"upgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"downgrade_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"moved_in_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"moved_out_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"waiting_mrr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_eid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise_2_monthly_1501"</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.firstofficer.io/v2/mrr_by_plan?start_month=2019-01-01&amp;end_month=2019-02-01</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_month <small>string</small></td>
+<td>The starting month from which MRR data needs to be returned grouped by plan.</td>
+</tr>
+<tr>
+<td>end_month <small>string</small></td>
+<td>The ending month (inclusive) till which MRR data needs to be returned grouped by plan.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>Returns a list of MRR objects grouped by plans and aggregated on a monthly basis.</p>
+
           <h1 id="invoices">Invoices</h1>
 
 <p>Invoices API allows you to import non-Stripe payments to FirstOfficer. </p>
