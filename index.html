@@ -872,13 +872,27 @@ Paginate through the customers by using starting_after argument. </p>
 <td>downgrade_mrr <small>integer</small></td>
 <td>MRR from downgrades to lower priced plans and decreased seats</td>
 </tr>
+<tr>
+<td>moved_in_mrr <small>integer</small></td>
+<td></td>
+</tr>
+<tr>
+<td>moved_out_mrr <small>integer</small></td>
+<td></td>
+</tr>
+<tr>
+<td>waiting_mrr <small>integer</small></td>
+<td>Expected MRR from subscriptions to be charged. Only shown for current month. The MRR already</td>
+</tr>
+<tr>
+<td>plan_name <small>string</small></td>
+<td>Plan name</td>
+</tr>
+<tr>
+<td>plan_eid <small>string</small></td>
+<td>Plan eid (as set in Stripe). (non-null)</td>
+</tr>
 </tbody></table>
-
-<p>moved_in_mrr <small>integer</small>
-moved_out_mrr <small>integer</small>
-waiting_mrr <small>integer</small> | Expected MRR from subscriptions to be charged. Only shown for current month. The MRR already 
-plan_name <small>string</small>  | Plan name
-plan_eid <small>string</small> | Plan eid (as set in Stripe). (non-null)</p>
 
 <h2 id="retrieve-yearly-mrr-by-plans">Retrieve Yearly MRR by Plans</h2>
 
