@@ -14,6 +14,7 @@ includes:
   - errors
   - customers
   - mrr
+  - mrr_by_plan
   - invoices
   - plans
 
